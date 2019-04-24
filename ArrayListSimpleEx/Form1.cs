@@ -16,6 +16,7 @@ namespace ArrayListSimpleEx
     public partial class Form1 : Form
     {
         ArrayList Message;
+        bool IsRev = false;
 
         public Form1()
         {
@@ -30,6 +31,8 @@ namespace ArrayListSimpleEx
             {
                 lblMessage.Text += msg[i] + " ";
             }
+
+            IsRev = false;
         }
 
         private void ShowReverse()
@@ -39,6 +42,8 @@ namespace ArrayListSimpleEx
             RevMsg.Reverse();
 
             ShowMessage(RevMsg);
+
+            IsRev = true;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -68,6 +73,10 @@ namespace ArrayListSimpleEx
             {
                 MessageBox.Show("You've Already added a word");
             }
+            else if (IsRev == true)
+            {
+                MessageBox.Show("You cannot add a word when the message is reversed");
+            }
             else
             {
                 Message.Insert(1, txtSecondPos.Text);
@@ -84,7 +93,15 @@ namespace ArrayListSimpleEx
             else
             {
                 Message.RemoveAt(1);
-                ShowMessage(Message);
+
+                if (IsRev == true)
+                {
+                    ShowReverse();
+                }
+                else
+                {
+                    ShowMessage(Message);
+                }
             }
         }
     }
