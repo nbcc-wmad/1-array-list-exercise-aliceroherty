@@ -23,6 +23,8 @@ namespace ArrayListSimpleEx
             InitializeComponent();
         }
 
+        #region User-defined Methods
+
         private void ShowMessage(ArrayList msg)
         {
             lblMessage.Text = string.Empty;
@@ -46,63 +48,104 @@ namespace ArrayListSimpleEx
             IsRev = true;
         }
 
+        #endregion
+
+        #region Event-Handlers
+
         private void Form1_Load(object sender, EventArgs e)
         {
-            Message = new ArrayList();
+            try
+            {
+                Message = new ArrayList();
 
-            Message.Add("I");
-            Message.Add("Love");
-            Message.Add("Programming");
-            Message.Add("So");
-            Message.Add("Much");
+                Message.Add("I");
+                Message.Add("Love");
+                Message.Add("Programming");
+                Message.Add("So");
+                Message.Add("Much");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, ex.GetType().ToString());
+            }
         }
 
         private void btnShowMsg_Click(object sender, EventArgs e)
         {
-            ShowMessage(Message);
+            try
+            {
+                ShowMessage(Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, ex.GetType().ToString());
+            }
         }
 
         private void btnReverse_Click(object sender, EventArgs e)
         {
-            ShowReverse();
+            try
+            {
+                ShowReverse();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, ex.GetType().ToString());
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (Message.Count > 5)
+            try
             {
-                MessageBox.Show("You've Already added a word");
+                if (Message.Count > 5)
+                {
+                    MessageBox.Show("You've Already added a word");
+                }
+                else if (IsRev == true)
+                {
+                    MessageBox.Show("You cannot add a word when the message is reversed");
+                }
+                else
+                {
+                    Message.Insert(1, txtSecondPos.Text);
+                    ShowMessage(Message);
+                }
             }
-            else if (IsRev == true)
+            catch (Exception ex)
             {
-                MessageBox.Show("You cannot add a word when the message is reversed");
-            }
-            else
-            {
-                Message.Insert(1, txtSecondPos.Text);
-                ShowMessage(Message);
+                MessageBox.Show(ex.Message, ex.GetType().ToString());
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (Message.Count == 5)
+            try
             {
-                MessageBox.Show("You've haven't added a word");
-            }
-            else
-            {
-                Message.RemoveAt(1);
-
-                if (IsRev == true)
+                if (Message.Count == 5)
                 {
-                    ShowReverse();
+                    MessageBox.Show("You've haven't added a word");
                 }
                 else
                 {
-                    ShowMessage(Message);
+                    Message.RemoveAt(1);
+
+                    if (IsRev == true)
+                    {
+                        ShowReverse();
+                    }
+                    else
+                    {
+                        ShowMessage(Message);
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, ex.GetType().ToString());
+            }
         }
+
+        #endregion
     }
 }
